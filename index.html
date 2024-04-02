@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clipboard bug - "text/rft" type</title>
+
+<style>
+code, pre {
+  background-color: #f0f0f0;
+  font-family: monospace;
+}
+</style>
+</head>
+
+<body>
+  <h2>Open the doc file, select all, and paste to the page</h2>
+  <p>
+    <a download href="https://raw.githubusercontent.com/zunsthy/clipboard-rtf-bug-demo/main/Doc with bug.docx">Doc with bug</a>
+  </p>
+  <p>
+    <a download href="https://raw.githubusercontent.com/zunsthy/clipboard-rtf-bug-demo/main/Normal Doc.docx">Doc with no bug</a>
+  </p>
+
+  <p>Listen DOM <code>paste</code> event and get 'text/rtf' data from <code>event.clipboardData</code>.</p>
+  <pre><code id="code">
+window.addEventListener('paste', function (ev) {
+  const data = ev.clipboardData.getData('text/rtf')
+  console.log('RTF data:', data)
+  document.getElementById('result').innerText = data || '&lt;Empty Content&gt;'
+})
+  </code></pre>
+
+  <p>Result will display to the below area. (It will be <code>&lt;Empty Content&gt;</code> if no content)</p>
+  <hr>
+  <pre><code id="result"></code></pre>
+  
+<script>
+window.addEventListener('paste', function (ev) {
+  const data = ev.clipboardData.getData('text/rtf')
+  console.log('RTF data:', data)
+  document.getElementById('result').innerText = data || '<Empty Content>'
+})
+</script>
+</body>
+</html>
+
